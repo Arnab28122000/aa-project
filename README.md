@@ -92,3 +92,19 @@ Access the PgAdmin database UI locally at:
 
 - **Password:** root
 
+<br>
+## ❌ Step 5: Close the App
+
+When you are done with the application and need to stop all running containers, execute the following command:
+
+```bash
+
+docker-compose down
+
+```
+
+
+
+---
+
+

@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "aa-backend-service"
+version = "0.1.0"
+description = ""
+authors = ["arnab28122000 <arnab.bhattacharya28122000@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
+pandas = "^2.2.2"
+psycopg = {extras = ["binary"], version = "^3.1.13"}
+sqlmodel = "^0.0.18"
+uuid = "^1.30"
+fastapi = "^0.111.0"
+python-crontab = "^3.1.0"
+beautifulsoup4 = "^4.12.3"
+requests = "^2.32.2"
+gunicorn = "^22.0.0"
+psycopg2 = "^2.9.9"
+psycopg2-binary = "^2.9.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
