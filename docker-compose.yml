@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  aa-ui:
+    build:
+      context: ./aa-ui
+    ports:
+      - '3000:3000'
+    depends_on:
+      - aa-backend-service
+
+  aa-backend-service:
+    build:
+      context: ./aa-backend-service
+    ports:
+      - '5001:5001'
+    environment:
+      - DATABASE_URL=postgresql://user124:password124@pg-database:5432/dashtics
+    depends_on:
+      - pg-database
+
+  pg-database:
+    container_name: setu_db_container
+    image: postgres:alpine
+    restart: always
+    environment:
+      POSTGRES_USER: user124
+      POSTGRES_PASSWORD: password124
+      POSTGRES_DB: dashtics
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+
+volumes:
+  pgdata:
