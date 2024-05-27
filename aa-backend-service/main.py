@@ -1,3 +1,8 @@
+import pytest
+import argparse
+import subprocess
+import sys
+
 from fastapi import FastAPI
 from aa_backend_service.routers import account_aggregator
 from fastapi.middleware.cors import CORSMiddleware
@@ -39,6 +44,19 @@ def on_startup():
 async def root():
     return "Welcome to AA Metrics"
 
+def run_tests():
+    result = subprocess.run([sys.executable, '-m', 'pytest', 'tests'], check=False)
+    return result.returncode
+
 if __name__ == "__main__":
-    create_cron_job()
-    # create_dummy_aa_data()
+    parser = argparse.ArgumentParser(description="Run the FastAPI app or tests.")
+    parser.add_argument(
+        "command", 
+        choices=["run", "--test"], 
+        help="The command to execute: run the application or run tests."
+    )
+    args = parser.parse_args()
+
+    if args.command == "test":
+        exit_code = run_tests()
+        sys.exit(exit_code)
